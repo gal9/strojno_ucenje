@@ -1,9 +1,17 @@
-from Data_handler import Data_handler
+import pandas as pd
+df = pd.DataFrame(pd.date_range(start="2019-09-01", end="2019-09-30", freq='D', name='ds'))
+df["y"] = range(1,31)
+df["add1"] = range(101,131)
+df["add2"] = range(201,231)
 
-data=Data_handler()
-data.load_data_csv("data/ground/85012.csv")
-data.calculate_level_diff()
-data.construct_features(max_average=2, max_shift=0, skip=["level", "level_diff"], horizon=3)
-data.target_value_construction(horizons=[3])
-data.show()
-data.graph("level")
+df_train = df.loc[df["ds"]<"2019-09-21"]
+df_test  = df.loc[df["ds"]>="2019-09-21"]
+
+from fbprophet import Prophet
+m = Prophet()
+m.add_regressor('add1')
+m.add_regressor('add2')
+m.fit(df_train)
+forecast = m.predict(df_test.drop(columns="y"))
+print(forecast)
+print(df_test.drop(columns="y"))

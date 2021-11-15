@@ -5,9 +5,13 @@ import pandas as pd
 from typing import Any
 from IPython.display import display
 import matplotlib.pyplot as plt
+from sklearn.feature_selection import SelectKBest, f_regression
 
 class Data_handler:
     dataframe: Any
+
+    def __init__(self, path: str) -> None:
+        self.load_data_csv(path)
 
     def load_data_csv(self, path: str) -> None:
         # Load data from csv
@@ -56,6 +60,19 @@ class Data_handler:
 
     def show(self) -> None:
         display(self.dataframe)
+
+    def select_k_best_features(self, k: int, target_column: str) -> None:
+        # Create and fit selector
+        selector = SelectKBest(f_regression, k=k)
+        selector.fit(self.dataframe.drop(columns=["level", "level_diff", target_column]), self.dataframe[target_column])
+
+        print(selector.get_feature_names_out())
+
+        # get column indices and only keep those
+        features = self.dataframe.drop(columns=["level", "level_diff", target_column]).iloc[:, selector.get_support(indices=True)]
+        features[target_column] = self.dataframe[target_column]
+        self.dataframe = features
+
 
     def graph(self, column: str) -> None:
         #plt.plot(self.dataframe.index, self.dataframe[column])
