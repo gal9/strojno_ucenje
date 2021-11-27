@@ -1,7 +1,8 @@
 import pandas as pd
 from typing import List
 
-import pandas as pd
+import math
+import numpy as np
 from typing import Any
 from IPython.display import display
 import matplotlib.pyplot as plt
@@ -25,54 +26,67 @@ class Data_handler:
         # remove the first line
         self.dataframe = self.dataframe[1:]
 
-    def shift_features(self, max_shift: int, skip: List[str], horizon: int) -> None:
+    def shift_features(self, shifts: List[int], skip: List[str], horizon: int) -> None:
         # Loop over all features
         for feature in list(self.dataframe.columns):
             # Loop over all shifts
-            for shift in range(1, max_shift+1):
-                if(feature in skip and shift<horizon):
-                    continue
+            for shift in shifts:
+                #if(feature in skip): #"""and shift<horizon):
+                #   continue
                 self.dataframe[f"{feature}_shift_{shift}"] = self.dataframe[feature].shift(shift)
     
-    def average_features(self, max_average: int, skip: List[str]) -> None:
+    def average_features(self, averages: List[int], skip: List[str]) -> None:
         # Loop over all features
         for feature in list(self.dataframe.columns):
             # Loop over all averages
-            for average in range(2, max_average+1):
-                if(feature in skip):
-                    continue
+            for average in averages:
+                #if(feature in skip):
+                #    continue
                 self.dataframe[f"{feature}_average_{average}"] = self.dataframe[feature].rolling(average).sum()/average
 
-    def construct_features(self, max_average: int, max_shift: int, skip: List[str], horizon: int) -> None:
-        self.shift_features(max_shift=max_shift, skip=skip, horizon=horizon)
-        self.average_features(max_average=max_average, skip=skip)
+    def construct_time_of_year(self) -> None:
+        self.dataframe.index = pd.to_datetime(self.dataframe.index)
 
-        cut = max_shift + max_average -1
+        self.dataframe["month_normalized"] = 2 * math.pi * (self.dataframe.index.month-1) / 11
+
+        self.dataframe["month_cos"] = np.cos(self.dataframe["month_normalized"])
+        self.dataframe["month_sin"] = np.sin(self.dataframe["month_normalized"])
+
+    def construct_features(self, averages: List[int], shifts: List[int], skip: List[str], horizon: int) -> None:
+        self.shift_features(shifts=shifts, skip=skip, horizon=horizon)
+        self.average_features(averages=averages, skip=skip)
+
+        cut = shifts[-1] + averages[-1] - 1
         self.dataframe = self.dataframe.iloc[cut:, :]
 
-    def target_value_construction(self, horizons: List[int]) -> None:
-        # Construct targert variables for all horizons
-        for horizon in horizons:
-            self.dataframe[f"level_diff_target_h{horizon}"] = self.dataframe["level_diff"].shift(-horizon)
+    def target_value_construction(self, horizon: int, target: str) -> None:
+        # Construct targert variable
+        self.dataframe[target + f"_target_h{horizon}"] = self.dataframe[target].shift(-horizon)
 
         # Cut samples without data
-        self.dataframe = self.dataframe.iloc[:-max(horizons), :]
+        self.dataframe = self.dataframe.iloc[:-horizon, :]
 
     def show(self) -> None:
         display(self.dataframe)
 
-    def select_k_best_features(self, k: int, target_column: str) -> None:
+    def select_k_best_features(self, k: int, target_column: str, preselected: List[str]) -> None:
         # Create and fit selector
         selector = SelectKBest(f_regression, k=k)
-        selector.fit(self.dataframe.drop(columns=["level", "level_diff", target_column]), self.dataframe[target_column])
+        selector = selector.fit(self.dataframe.drop(columns=[target_column]), self.dataframe[target_column])
 
-        print(selector.get_feature_names_out())
+        column_names = preselected + list(set(selector.get_feature_names_out()) - set(preselected))
+
+        print("selected features: ")
+        #print(selector.get_feature_names_out())
+        print(column_names)
 
         # get column indices and only keep those
-        features = self.dataframe.drop(columns=["level", "level_diff", target_column]).iloc[:, selector.get_support(indices=True)]
+        #features = self.dataframe.drop(columns=[target_column]).iloc[:, selector.get_support(indices=True)]
+        features = self.dataframe[column_names]
         features[target_column] = self.dataframe[target_column]
         self.dataframe = features
-
+        
+        #print(self.dataframe.head(15))
 
     def graph(self, column: str) -> None:
         #plt.plot(self.dataframe.index, self.dataframe[column])
