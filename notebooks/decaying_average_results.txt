@@ -1,0 +1,5 @@
+Horizon 1 => score: 0.7809965279644093, decay_rate: 0.0
+Horizon 2 => score: 0.4501209804373264, decay_rate: 0.0
+Horizon 3 => score: 0.25483848531179737, decay_rate: 0.76
+Horizon 4 => score: 0.17421492056231797, decay_rate: 0.85
+Horizon 5 => score: 0.1206111741958898, decay_rate: 0.88

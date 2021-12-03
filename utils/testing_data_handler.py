@@ -22,13 +22,10 @@ target = "level"
 
 data = Data_handler("../data/ground/85012.csv")
 data.construct_time_of_year()
-#data.calculate_level_diff()
 data.construct_features(averages=additional, shifts=additional, skip=["level"], horizon=horizon)
 
 # Must be after feature construction
 data.target_value_construction(horizon=horizon, target=target)
-#data.show()
-#data.show()
 data.select_k_best_features(10, target + f"_target_h{horizon}", preselected=preselected)
 data.show()
 
@@ -38,5 +35,5 @@ model=GradientBoostingRegressor(n_estimators=300)
 y = data.dataframe[target + f"_target_h{horizon}"]
 X = data.dataframe.drop(columns=[target + f"_target_h{horizon}"])
 
-cvs=cross_val_score(model, X, y, scoring='r2', cv=timeSeriesCV)
+cvs=cross_val_score(model, X, y, scoring='r2', cv=timeSeriesCV, n_jobs=-1)
 print("R2: ", cvs.mean(), " stdev: ", cvs.std())

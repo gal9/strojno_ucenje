@@ -10,6 +10,8 @@ from sklearn.feature_selection import SelectKBest, f_regression
 
 class Data_handler:
     dataframe: Any
+    pretrain_dataframe: Any
+    totest_dataframe: Any
 
     def __init__(self, path: str) -> None:
         self.load_data_csv(path)
@@ -52,12 +54,21 @@ class Data_handler:
         self.dataframe["month_cos"] = np.cos(self.dataframe["month_normalized"])
         self.dataframe["month_sin"] = np.sin(self.dataframe["month_normalized"])
 
+        self.dataframe = self.dataframe.drop(columns=["month_normalized"])
+
     def construct_features(self, averages: List[int], shifts: List[int], skip: List[str], horizon: int) -> None:
         self.shift_features(shifts=shifts, skip=skip, horizon=horizon)
         self.average_features(averages=averages, skip=skip)
 
         cut = shifts[-1] + averages[-1] - 1
         self.dataframe = self.dataframe.iloc[cut:, :]
+
+    def select_features(self, features_names: List[str], target_column: str = None) -> None:
+        features = self.dataframe[features_names]
+        if(target_column is not None):
+            features[target_column] = self.dataframe[target_column]
+        
+        self.dataframe = features
 
     def target_value_construction(self, horizon: int, target: str) -> None:
         # Construct targert variable
@@ -87,6 +98,10 @@ class Data_handler:
         self.dataframe = features
         
         #print(self.dataframe.head(15))
+
+    def pretrain_test_split(self, split_index: int) -> None:
+        self.pretrain_dataframe = self.dataframe.iloc[:split_index, :]
+        self.totest_dataframe = self.dataframe.iloc[split_index:, :]
 
     def graph(self, column: str) -> None:
         #plt.plot(self.dataframe.index, self.dataframe[column])

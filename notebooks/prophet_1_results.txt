@@ -1,0 +1,10 @@
+Horizon 1 => socre: -8.841106255897623
+Horizon 2 => socre: -8.879509347301326
+Horizon 3 => socre: -8.82212281305664
+Horizon 4 => socre: -9.587533609209546
+Horizon 5 => socre: -9.801980081236607
+Horizon 6 => socre: -9.644098834652866
+Horizon 7 => socre: -10.057632241523448
+Horizon 8 => socre: -10.217521312934592
+Horizon 9 => socre: -10.9733238605229
+Horizon 10 => socre: -9.842289450436898

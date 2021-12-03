@@ -1,0 +1,10 @@
+0|0.07876036480979653|257|0.8884395524233644|1|2|1 => ocena: 0.8377889863389351
+2|0.16540438260406276|10|0.1|98|0.6298967757867768|0|6|0
+0|0.06080535279328014|58|0.9748969986855341|0|2|1
+2|0.09433663761555688|294|0.5731204270364691|1|7|0
+
+h1
+h2
+h3{loss :  squared_error, learning_rate :  0.1, n_estimators :  99, subsample :  0.6298967757867768, criterion :  friedman_mse, min_samples_split :  8, max_depth :  2 => ocena: 0.4145711904891291 }
+h4:{loss :  squared_error, learning_rate :  0.06080535279328014, n_estimators :  59, subsample :  0.9748969986855341, criterion :  friedman_mse, min_samples_split :  4, max_depth :  3 => ocena: 0.3147330132070727 }
+h5: {loss :  huber, learning_rate :  0.09433663761555688, n_estimators :  295, subsample :  0.5731204270364691, criterion :  squared_error, min_samples_split :  9, max_depth :  2 => ocena: 0.25177402311299313 }
