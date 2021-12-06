@@ -25,7 +25,7 @@ from src.Gen import Interval, Mnozica, Urejena_mnozica
 from src.Krizanje import Diagonalno_krizanje
 
 
-horizons = [1, 2, 3, 6, 7, 8, 9, 10]
+horizons = [6, 7, 8, 9, 10]
 additional = [1, 2, 3, 4, 5, 6, 7, 10]
 features = [
     'level', 
@@ -116,7 +116,12 @@ for horizon in horizons:
 
     alg.pozeni()
 
-    output_file.write(f"Horizon: {horizon}: {alg.najboljsi.izpisi()} \n")
+    s = ""
+    for g in alg.najboljsi.geni[:]:
+        s = s + f"{g.tip.ime}: {g.vrednost}, "
+    s = s + f"=> ocena: {alg.najboljsi.ocena}"
+
+    output_file.write(f"Horizon: {horizon}: {s} \n")
     output_file.flush()
 
 output_file.close()

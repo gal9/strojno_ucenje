@@ -1,0 +1,2 @@
+Horizon: 1: loss: squared_error, learning_rate: 0.1, n_estimators: 152, subsample: 0.9779293068154264, criterion: friedman_mse, min_samples_split: 2, max_depth: 3, => ocena: 0.839411484340841 
+Horizon: 2: loss: squared_error, learning_rate: 0.18434194814314497, n_estimators: 78, subsample: 1, criterion: friedman_mse, min_samples_split: 5, max_depth: 2, => ocena: 0.5915592140084929 
