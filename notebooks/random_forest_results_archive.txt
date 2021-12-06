@@ -1,0 +1,3 @@
+Horizon: 1: n_estimators: 208, criterion: squared_error, min_samples_leaf: 2, min_samples_leaf: 4, max_depth: 12, => ocena: 0.823335327597457 
+Horizon: 2: n_estimators: 118, criterion: squared_error, min_samples_leaf: 1, min_samples_leaf: 8, max_depth: 9, => ocena: 0.5724726184468182 
+Horizon: 3: n_estimators: 165, criterion: squared_error, min_samples_leaf: 7, min_samples_leaf: 9, max_depth: 8, => ocena: 0.4040608956193862 
