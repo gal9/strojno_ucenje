@@ -1,3 +1,10 @@
 Horizon: 1: n_estimators: 208, criterion: squared_error, min_samples_leaf: 2, min_samples_leaf: 4, max_depth: 12, => ocena: 0.823335327597457 
 Horizon: 2: n_estimators: 118, criterion: squared_error, min_samples_leaf: 1, min_samples_leaf: 8, max_depth: 9, => ocena: 0.5724726184468182 
 Horizon: 3: n_estimators: 165, criterion: squared_error, min_samples_leaf: 7, min_samples_leaf: 9, max_depth: 8, => ocena: 0.4040608956193862 
+Horizon: 4: n_estimators: 151, criterion: squared_error, min_samples_leaf: 7, min_samples_leaf: 9, max_depth: 7, => ocena: 0.2979774609385373 
+Horizon: 5: n_estimators: 261, criterion: squared_error, min_samples_leaf: 5, min_samples_leaf: 9, max_depth: 6, => ocena: 0.21272130450809507 
+Horizon: 6: n_estimators: 175, criterion: absolute_error, min_samples_leaf: 4, min_samples_leaf: 8, max_depth: 8, => ocena: 0.14871975344508365 
+Horizon: 7: n_estimators: 37, criterion: absolute_error, min_samples_leaf: 8, min_samples_leaf: 9, max_depth: 7, => ocena: 0.106111965829074 
+Horizon: 8: n_estimators: 161, criterion: squared_error, min_samples_leaf: 1, min_samples_leaf: 3, max_depth: 3, => ocena: 0.10321161257185991 
+Horizon: 9: n_estimators: 229, criterion: squared_error, min_samples_leaf: 7, min_samples_leaf: 4, max_depth: 3, => ocena: 0.07898914221042833 
+Horizon: 10: n_estimators: 72, criterion: squared_error, min_samples_leaf: 6, min_samples_leaf: 5, max_depth: 3, => ocena: 0.05119864999080933 

@@ -26,7 +26,7 @@ from src.Gen import Interval, Mnozica, Urejena_mnozica
 from src.Krizanje import Diagonalno_krizanje
 
 
-horizons = [1, 2, 6, 7, 8, 9, 10]
+horizons = [8, 9, 10]
 additional = [1, 2, 3, 4, 5, 6, 7, 10]
 features = [
     'level', 
