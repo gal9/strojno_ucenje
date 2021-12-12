@@ -1,4 +1,3 @@
-Horizon: 1: loss: squared_error, learning_rate: 0.1, n_estimators: 152, subsample: 0.9779293068154264, criterion: friedman_mse, min_samples_split: 2, max_depth: 3, => ocena: 0.839411484340841 
-Horizon: 2: loss: squared_error, learning_rate: 0.18434194814314497, n_estimators: 78, subsample: 1, criterion: friedman_mse, min_samples_split: 5, max_depth: 2, => ocena: 0.5915592140084929 
-Horizon: 6: loss: huber, learning_rate: 0.028099065210575147, n_estimators: 74, subsample: 0.05433725073592999, criterion: squared_error, min_samples_split: 3, max_depth: 4, => ocena: 0.1953916408871273 
-Horizon: 7: loss: huber, learning_rate: 0.022065620989101586, n_estimators: 215, subsample: 0.18678415345332355, criterion: friedman_mse, min_samples_split: 5, max_depth: 3, => ocena: 0.16001758817381243 
+Horizon: 8: loss: huber, learning_rate: 0.030407802353041413, n_estimators: 93, subsample: 0.22293529056577288, criterion: friedman_mse, min_samples_split: 5, max_depth: 3, => ocena: 0.12911702417408527 
+Horizon: 9: loss: huber, learning_rate: 0.04347458360297672, n_estimators: 94, subsample: 0.6000404243696749, criterion: friedman_mse, min_samples_split: 4, max_depth: 2, => ocena: 0.09656167325008963 
+Horizon: 10: loss: huber, learning_rate: 0.06973556618450416, n_estimators: 36, subsample: 0.3769110610197152, criterion: friedman_mse, min_samples_split: 2, max_depth: 3, => ocena: 0.07676439560894653 
