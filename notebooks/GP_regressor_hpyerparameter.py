@@ -15,7 +15,7 @@ sys.path.append("..")
 
 from Data_handler import Data_handler
 
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.metrics import r2_score
 
@@ -25,7 +25,7 @@ from src.Gen import Interval, Mnozica, Urejena_mnozica
 from src.Krizanje import Diagonalno_krizanje
 
 
-horizons = [4, 5, 6, 7, 8, 9, 10]
+horizons = [3, 4, 5, 6, 7, 8, 9, 10]
 additional = [1, 2, 3, 4, 5, 6, 7, 10]
 features = [
     'level', 
@@ -45,18 +45,16 @@ K = 10
 sensor_name = "85012"
 
 
-criterion = Mnozica('criterion', ['absolute_error', 'squared_error'])
-n_estimators = Urejena_mnozica( "n_estimators", list(range(1, 300)), stdev = 10)
-max_depth = Urejena_mnozica('max_depth', [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, None], stdev=1)
-min_samples_split = Urejena_mnozica('min_samples_split', list(range(2, 10)), stdev = 1)
-min_samples_leaf = Urejena_mnozica('min_samples_leaf', list(range(1, 10)), stdev = 1)
+normalize_y = Mnozica('normalize_y', [True, False])
+n_restarts_optimizer = Urejena_mnozica( "n_restarts_optimizer", list(range(0, 10)), stdev = 1)
+alpha = Interval("alpha", zacetek=1e-13, konec=1e-8, stdev=1e-10)
 
-geni = [n_estimators, criterion, min_samples_split, min_samples_leaf, max_depth]
+geni = [normalize_y, n_restarts_optimizer, alpha]
 
-populacija = [{"n_estimators": 100, "criterion": "squared_error", "min_samples_split": 2, "min_samples_leaf": 1, "max_depth": None}]
+populacija = [{"n_restarts_optimizer": 0, "normalize_y": False, "alpha": 1e-10}]
 
 
-output_file = open("random_forest_regressor_results_correct.txt", "w")
+output_file = open("GP_regressor_results_correct.txt", "w")
 
 for horizon in horizons:
     print(f"Horizon {horizon}")
@@ -84,8 +82,7 @@ for horizon in horizons:
         X = data_handler.totest_dataframe.drop(columns=[f"{target}_target_h{horizon}"]).reset_index(drop=True)
         y = data_handler.totest_dataframe[f"{target}_target_h{horizon}"].reset_index(drop=True)
 
-        r = RandomForestRegressor()
-        hiperparametri["n_jobs"] = -1
+        r = GaussianProcessRegressor()
         r.set_params(**hiperparametri)
 
         # cross validation
@@ -108,8 +105,8 @@ for horizon in horizons:
         
         return mean(scores)
 
-    kriz = Diagonalno_krizanje(stevilo_starsev = 4)
-    alg = EAlgoritem(velikost_populacije = 30, omejitev_stevila_ocenjevanj = 300, stevilo_starsev_za_izbiro = 8,
+    kriz = Diagonalno_krizanje(stevilo_starsev = 2)
+    alg = EAlgoritem(velikost_populacije = 15, omejitev_stevila_ocenjevanj = 55, stevilo_starsev_za_izbiro = 8,
                         stevilo_potomcev = 6, cenilna_funkcija = scoring_function, tipi_genov = geni, krizanje = kriz,
                         zacetna_populacija = populacija, verjetnost_mutacije=1/10)
 

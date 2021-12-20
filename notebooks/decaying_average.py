@@ -1,4 +1,6 @@
 import sys
+
+from numpy.core.numeric import Inf
 sys.path.append("../utils")
 
 from Data_handler import Data_handler
@@ -9,7 +11,7 @@ from statistics import stdev, mean
 import matplotlib.pyplot as plt
 import numpy as np
 
-horizons = [1, 2, 3, 4, 5]
+horizons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 additional = []
 sensor_name = "85012"
 features = ["level"]
@@ -17,6 +19,7 @@ target = "level"
 K = 10
 
 output_file = open("decaying_average_results.txt", "w")
+horizon_scores = []
 
 for horizon in horizons:
     print(f"Horizon {horizon}")
@@ -35,10 +38,10 @@ for horizon in horizons:
     timeSeriesCV = TimeSeriesSplit(n_splits=10)
     decay_factor_scores = []
     decay_factor_means = []
-    max_score = 0
+    max_score = -Inf
     best_decay = -1
     for decay_factor in list(np.arange(0, 1, 0.01)):
-        print(f"Decay factor: {decay_factor}")
+        #print(f"Decay factor: {decay_factor}")
 
         model = Decaying_average(decay_factor=decay_factor)
 
@@ -74,10 +77,19 @@ for horizon in horizons:
     #print(decay_factor_means)
     output_file.write(f"Horizon {horizon} => score: {max_score}, decay_rate: {best_decay}\n")
     print(f"Best decay rate: {best_decay} with score: {max_score}")
-    plt.plot(list(np.arange(0, 1, 0.01)), decay_factor_means)
+    horizon_scores.append(max_score)
+    """plt.plot(list(np.arange(0, 1, 0.01)), decay_factor_means)
     plt.plot([best_decay], [max_score], 'ro', label="Best decay rate")
     plt.title(f"Best decay factor for horizon {horizon}")
     plt.xlabel("decay rate")
     plt.ylabel("R2 score")
     plt.legend()
-    plt.show()
+    plt.show()"""
+
+print(horizon_scores)
+
+plt.plot(list(range(1, 11)), horizon_scores)
+plt.title(f"Baseline score for horizon")
+plt.xlabel("Horizon")
+plt.ylabel("Best R2 score")
+plt.show()

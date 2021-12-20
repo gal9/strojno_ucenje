@@ -13,37 +13,9 @@ from sklearn.model_selection import cross_val_score, TimeSeriesSplit
 from sklearn.metrics import r2_score
 from statistics import stdev, mean
 
-class suppress_stdout_stderr(object):
-    '''
-    A context manager for doing a "deep suppression" of stdout and stderr in
-    Python, i.e. will suppress all print, even if the print originates in a
-    compiled C/Fortran sub-function.
-       This will not suppress raised exceptions, since exceptions are printed
-    to stderr just before a script exits, and after the context manager has
-    exited (at least, I think that is why it lets exceptions through).
-
-    '''
-    def __init__(self):
-        # Open a pair of null files
-        self.null_fds = [os.open(os.devnull, os.O_RDWR) for x in range(2)]
-        # Save the actual stdout (1) and stderr (2) file descriptors.
-        self.save_fds = (os.dup(1), os.dup(2))
-
-    def __enter__(self):
-        # Assign the null pointers to stdout and stderr.
-        os.dup2(self.null_fds[0], 1)
-        os.dup2(self.null_fds[1], 2)
-
-    def __exit__(self, *_):
-        # Re-assign the real stdout/stderr back to (1) and (2)
-        os.dup2(self.save_fds[0], 1)
-        os.dup2(self.save_fds[1], 2)
-        # Close the null files
-        os.close(self.null_fds[0])
-        os.close(self.null_fds[1])
-
 horizons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 additional = [1, 2, 3, 4, 5, 6, 7, 10]
+#3
 features = [
        "level", 
        "temperature_avg_average_1",
@@ -57,7 +29,13 @@ features = [
        "cloud_cover",
        "sun_duration",
        ]
-features = []
+#2
+"""features = [
+    "level",
+    "precipitation",
+    "cloud_cover"
+]
+#1
 features = [
     "level",
     "precipitation",
@@ -68,13 +46,13 @@ features = [
     "temperature_avg",
     "temperature_min",
     "temperature_max"
-]
+]"""
 
 target = "level"
 K = 10
 sensor_name = "85012"
 
-output_file = open("prophet_2_results.txt", "w")
+output_file = open("prophet3_results.txt", "w")
 
 for horizon in horizons:
     print(f"Horizon {horizon}")
@@ -93,7 +71,7 @@ for horizon in horizons:
     data_handler.pretrain_test_split(800)
 
     #splits data considering it is a time series
-    timeSeriesCV = TimeSeriesSplit(n_splits=3)
+    timeSeriesCV = TimeSeriesSplit(n_splits=10)
 
     model = Live_prophet(horizon=horizon, regressors=features)
 
