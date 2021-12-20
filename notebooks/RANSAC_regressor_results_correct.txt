@@ -1,0 +1,10 @@
+Horizon: 1: max_trials: 188, => ocena: 0.8101027412736854 
+Horizon: 2: max_trials: 160, => ocena: 0.5333387912037195 
+Horizon: 3: max_trials: 239, => ocena: 0.35183556032566227 
+Horizon: 4: max_trials: 113, => ocena: 0.23511125031668545 
+Horizon: 5: max_trials: 143, => ocena: 0.15749156809945594 
+Horizon: 6: max_trials: 109, => ocena: 0.08521721868632409 
+Horizon: 7: max_trials: 161, => ocena: 0.03125177659473481 
+Horizon: 8: max_trials: 190, => ocena: -0.07217175644545416 
+Horizon: 9: max_trials: 144, => ocena: -0.07668974701949036 
+Horizon: 10: max_trials: 158, => ocena: -0.12405033962765344 
