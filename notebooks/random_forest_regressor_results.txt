@@ -1,3 +1,5 @@
 Horizon: 1: n_estimators: 190, criterion: squared_error, min_samples_split: 2, min_samples_leaf: 4, max_depth: 15, => ocena: 0.8231057608228532 
 Horizon: 2: n_estimators: 129, criterion: squared_error, min_samples_split: 3, min_samples_leaf: 9, max_depth: 13, => ocena: 0.5736559795525431 
 Horizon: 3: n_estimators: 155, criterion: squared_error, min_samples_split: 2, min_samples_leaf: 9, max_depth: 15, => ocena: 0.404005485004572 
+Horizon: 4: n_estimators: 148, criterion: squared_error, min_samples_split: 2, min_samples_leaf: 9, max_depth: 6, => ocena: 0.295612574051241 
+Horizon: 5: n_estimators: 131, criterion: squared_error, min_samples_split: 6, min_samples_leaf: 9, max_depth: 6, => ocena: 0.2151293620785083 

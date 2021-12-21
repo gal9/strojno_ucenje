@@ -4,3 +4,7 @@ Horizon 3 => socre: -4.9023666146500835
 Horizon 4 => socre: -6.805443181442503
 Horizon 5 => socre: -8.904578597731765
 Horizon 6 => socre: -7.950927740756334
+Horizon 7 => socre: -8.769539815870138
+Horizon 8 => socre: -10.652873667139103
+Horizon 9 => socre: -5.619424280996849
+Horizon 10 => socre: -4.705938277921665
