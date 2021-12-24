@@ -1,3 +1,0 @@
-Horizon: 6: normalize_y: True, n_restarts_optimizer: 0, alpha: 1e-10, => ocena: -0.2060226037878377 
-Horizon: 7: normalize_y: True, n_restarts_optimizer: 0, alpha: 1e-13, => ocena: -0.20425513898518682 
-Horizon: 8: normalize_y: True, n_restarts_optimizer: 0, alpha: 8.968527587358297e-09, => ocena: -0.20836225444057405 

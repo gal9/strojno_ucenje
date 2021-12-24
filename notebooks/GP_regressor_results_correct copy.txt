@@ -1,7 +1,10 @@
 Horizon: 1: normalize_y: True, n_restarts_optimizer: 3, alpha: 1.2705077694407896e-11, => ocena: -0.16489293927010382 
 Horizon: 2: normalize_y: True, n_restarts_optimizer: 3, alpha: 1e-13, => ocena: -0.16600327569967338 
 Horizon: 3: normalize_y: True, n_restarts_optimizer: 4, alpha: 1e-13, => ocena: -0.20166673508139396 
-
+Horizon: 4: normalize_y: True, n_restarts_optimizer: 0, alpha: 1e-13, => ocena: -0.20375337544810113 
+Horizon: 5: normalize_y: True, n_restarts_optimizer: 9, alpha: 1.2631114775384223e-09, => ocena: -0.20649506148376562 
 Horizon: 6: normalize_y: True, n_restarts_optimizer: 0, alpha: 1e-10, => ocena: -0.2060226037878377 
 Horizon: 7: normalize_y: True, n_restarts_optimizer: 0, alpha: 1e-13, => ocena: -0.20425513898518682 
 Horizon: 8: normalize_y: True, n_restarts_optimizer: 0, alpha: 8.968527587358297e-09, => ocena: -0.20836225444057405 
+Horizon: 9: normalize_y: True, n_restarts_optimizer: 8, alpha: 8.505757242721039e-09, => ocena: -0.22773591229952048 
+Horizon: 10: normalize_y: True, n_restarts_optimizer: 7, alpha: 7.019079611002361e-09, => ocena: -0.23966281824661512 
